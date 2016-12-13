@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='X-UA-Compatible' content='chrome=1'></meta>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'></meta>
-    <script type='text/javascript' src='./js/x3dom.js'></script>
+    <script type='text/javascript' src='http://x3dom.org/download/dev/x3dom-full.js'></script>
   
     <link rel='stylesheet' type='text/css' href='./css/x3dom.css'></link>
     <style>.x3dom-logContainer { bottom: 0px; position: absolute; } </style>
@@ -52,7 +52,8 @@
 	   <NavigationInfo type='WALK' avatarSize='25 160 75' speed='200'></navigationInfo>
 	    <Inline url='camera.x3d' nameSpaceName="flight" mapDEFToID="true" ></Inline>
           <viewpoint ID='CAM_1' DEF='CAM_1' orientation='0 -1 0 1.55005' position='6808.21 162.494 1193.7'></viewpoint>
-		  <background skyColor='0 0 0'></background>
+	  <background id='bgnd' skyColor='0 0 0'></background>
+      <group id='theScene'>
         <shape DEF='_G_1'>
           <appearance DEF='App_8'>
             <material DEF='AOPT_Material_136202744' ambientIntensity='0' diffuseColor='0.5 0.5 0.5' shininess='0.224609' specularColor='0.045 0.045 0.045'></material>
@@ -684,6 +685,7 @@
             </appearance>
             <binaryGeometry solid='false' lit='false'  DEF='BG_91' vertexCount='5856' primType='"TRIANGLES"' position='4683.13671875 1167.40905762 1208.7121582' size='7902.42578125 2342.22216797 4328.69628906' index='binGeo/BG_91_indexBinary.bin' coord='binGeo/BG_91_coordBinary.bin' normal='binGeo/BG_91_normalBinary.bin' texCoord='binGeo/BG_91_texCoordBinary.bin' color='binGeo/BG_91_colorBinary.bin'></binaryGeometry>
           </shape>
+      </group>
       </scene>
     </x3d>
   <script src="webvr.js"></script>
@@ -691,8 +693,8 @@
 WebVRSupport.initialize({
   x3dEl: 'x3dElement',
   viewpoint: 'CAM_1',
-  //background: 'bgnd',
-  scene: 'scene'
+  background: 'bgnd',
+  scene: 'theScene'
 });
 </script>
 
