@@ -48,7 +48,7 @@
       </div> 
     </div>
     <x3d id='x3dElement' showStat='false' showLog='false' style='width:100%; height:100%; border:0; margin:0; padding:0;'>
-      <scene DEF='scene' dopickpass='false'>
+      <scene DEF='scene' id='scene' dopickpass='false'>
 	   <NavigationInfo type='WALK' avatarSize='25 160 75' speed='200'></navigationInfo>
 	    <Inline onload="animateCamera();" url='camera.x3d' nameSpaceName="flight" mapDEFToID="true" ></Inline>
           <viewpoint ID='CAM_1' DEF='CAM_1' orientation='0 -1 0 1.55005' position='6808.21 162.494 1193.7'></viewpoint>
@@ -686,5 +686,15 @@
           </shape>
       </scene>
     </x3d>
+  <script src="webvr.js"></script>
+<script>
+WebVRSupport.initialize({
+  x3dEl: 'x3dElement',
+  viewpoint: 'CAM_1',
+  //background: 'bgnd',
+  scene: 'scene'
+});
+</script>
+
   </body>
 </html>
