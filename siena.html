@@ -36,12 +36,15 @@
         <table> 
           <tr> 
             <td>
-              <button onclick='document.getElementById(&apos;flight__camera3&apos;).setAttribute("set_bind","true");'> Animated Camera </button>  
+              <button onclick='document.getElementById(&apos;flight__camera3&apos;).setAttribute("set_bind","true");'>
+		      Animated Camera </button>  
             </td>
 			</tr>
 			<tr>
 			<td> 
-              <button onclick='document.getElementById(&apos;flight__camera3&apos;).setAttribute("set_bind","false"); document.getElementById(&apos;x3dElement&apos;).runtime.resetView();'> Interactive Camera </button> 
+              <button onclick='document.getElementById(&apos;flight__camera3&apos;).setAttribute("set_bind","false"); 
+			       document.getElementById(&apos;x3dElement&apos;).runtime.resetView();'>
+		      Interactive Camera </button> 
             </td> 			
 			</tr>
         </table> 
@@ -50,7 +53,7 @@
     <x3d id='x3dElement' showStat='false' showLog='false' style='width:100%; height:100%; border:0; margin:0; padding:0;'>
       <scene DEF='scene' id='scene' dopickpass='false'>
 	   <NavigationInfo type='WALK' avatarSize='25 160 75' speed='200'></navigationInfo>
-	    <!--Inline url='camera.x3d' nameSpaceName="flight" mapDEFToID="true" ></Inline-->
+	    <Inline url='camera.x3d' nameSpaceName="flight" mapDEFToID="true" ></Inline>
           <viewpoint ID='CAM_1' DEF='CAM_1' orientation='0 -1 0 1.55005' position='6808.21 162.494 1193.7'></viewpoint>
 	  <background id='bgnd' skyColor='0 0 0'></background>
       <group id='theScene'>
@@ -692,7 +695,7 @@
 <script>
 WebVRSupport.initialize({
   x3dEl: 'x3dElement',
-  viewpoint: 'CAM_1',
+  viewpoint: 'flight__camera3',
   background: 'bgnd',
   scene: 'theScene'
 });
