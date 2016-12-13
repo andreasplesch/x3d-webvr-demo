@@ -14,14 +14,16 @@
 			cam.setAttribute("set_bind","true");
 		}
 	};
+	function addCORS() {
 	var texs = document.querySelectorAll('ImageTexture');
 	for (var i = 0; i < texs.length; ++i) {
 		texs[i].setAttribute('crossOrigin','anonymous');
 	};
+	};
 	</script>
 	<script type='text/javascript' src='./js/x3dom.js'></script>
   </head>
-  <body style='width:100%; height:100%; border:0; margin:0; padding:0;'>
+  <body onload='addCORS()' style='width:100%; height:100%; border:0; margin:0; padding:0;'>
     <div id='HUDs_Div'> 
 	<div id='X3DOM_AOPT_Links' class='group' style='margin:2px; margin-top:26px; padding:4px; background-color:rgba(199,202,204,.7); position:absolute; float:center; z-index:1000;'> 
         <a href='http://www.x3dom.org'>X3DOM
