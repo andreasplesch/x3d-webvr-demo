@@ -99,15 +99,19 @@
 	<viewpoint ID='CAM_1' DEF='CAM_1' orientation='0 -1 0 1.55005' position='6808.21 162.494 1193.7'></viewpoint>
 	<background id='bgnd' skyColor='0 0 0'></background>
       <group id='theScene'>
-	<transform DEF='guideTrafo' scale='0.5 2 0.2'>
-		<inline url='http://raw.githubusercontent.com/andreasplesch/Library/master/Models/Vehicles/MiniCooper.x3d.uncompressed'>
-		<inline>
+	<transform DEF='guideTrafo'>
+		<transfrom scale='0.1 0.1 0.1' rotation='1 0 0 1.57'>
+			<inline url='http://raw.githubusercontent.com/andreasplesch/Library/master/Models/Vehicles/MiniCooper.x3d.uncompressed'>
+		</inline>
+		</transform>
+		<transform scale='0.5 2 0.2'>
 		<shape>
 			<appearance>
 				<material diffuseColor='0.3 0.3 0.3' specularColor='1 0 0' shininess='0.7'></material>
 			</appearance>
 			<box></box>
 		</shape>
+		</transform>
 	</transform>
 	      
 	<ROUTE fromNode='camera3CameraLocAnim' fromField='value_changed' toNode='guideTrafo' toField='set_translation'></ROUTE>
