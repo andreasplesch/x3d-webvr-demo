@@ -56,9 +56,9 @@
 			</tr>
 			<tr>
 				<td> 
-				<button onclick='document.getElementById(&apos;CAM_1&apos;).setAttribute("set_bind","true"); 
+				<button onclick='toggleAnimation();//document.getElementById(&apos;CAM_1&apos;).setAttribute("set_bind","true"); 
 				       //document.getElementById(&apos;x3dElement&apos;).runtime.resetView();'>
-				Interactive Camera </button> 
+				toggle animation </button> 
 				</td> 			
 			</tr>
 		</table> 
@@ -744,13 +744,23 @@
   <script src="webvr.js"></script>
 <script>
 
-  WebVRSupport.initialize({
-  x3dEl: 'x3dElement',
-  viewpoint: 'camera3',
-  background: 'bgnd',
-  scene: 'theScene'
+WebVRSupport.initialize({
+	x3dEl: 'x3dElement',
+	viewpoint: 'camera3',
+	background: 'bgnd',
+	scene: 'theScene'
 });
 
+var ts = document.querySelector("timeSensor");
+var isAnim = true;
+	
+function toggleAnimation () {
+	isAnim = !isAnim;
+	var now = Date.now()/1000;
+	if (isAnim) ts.setAttribute('resumeTime', now);
+	else ts.setAttribute('pauseTime', now);
+}
+	
 </script>
 
   </body>
