@@ -78,8 +78,7 @@
       <scene DEF='scene' id='scene' dopickpass='false'>
 	   <Environment frustumCulling="false"></Environment>
 	   <NavigationInfo type='WALK' avatarSize='25 160 75' speed='200'></NavigationInfo>
-	   <viewpoint ID='CAM_1' DEF='CAM_1' orientation='0 -1 0 1.55005' position='6808.21 162.494 1193.7'></viewpoint>
-           <transform DEF='cam3trafo' rotation='0 1 0 4.71239' translation='1150 200 1200'>
+	   <transform DEF='cam3trafo' rotation='0 1 0 4.71239' translation='1150 200 1200'>
             <viewpoint ID='camera3' DEF='camera3' description='camera3' orientation='0 1 0 0' position='0 0 0' fieldOfView='1.24803'></viewpoint>
            </transform>
 	  <timeSensor DEF='TimeSource' cycleInterval='83.333333' loop='true'></timeSensor>
@@ -90,7 +89,8 @@
 	  <ROUTE fromNode='TimeSource' fromField='fraction_changed' toNode='camera3CameraLocAnim' toField='set_fraction'></ROUTE>
 	  <ROUTE fromNode='TimeSource' fromField='fraction_changed' toNode='camera3CameraDirAnim' toField='set_fraction'></ROUTE>
 <!--Inline url='camera.x3d' nameSpaceName="flight" mapDEFToID="true" ></Inline-->
-	  <background id='bgnd' skyColor='0 0 0'></background>
+	  <viewpoint ID='CAM_1' DEF='CAM_1' orientation='0 -1 0 1.55005' position='6808.21 162.494 1193.7'></viewpoint>
+          <background id='bgnd' skyColor='0 0 0'></background>
       <group id='theScene'>
         <shape DEF='_G_1'>
           <appearance DEF='App_8'>
