@@ -100,9 +100,7 @@
     	
     	<ROUTE fromNode='TimeSource' fromField='fraction_changed' toNode='camera3CameraLocAnim' toField='set_fraction'></ROUTE>
 	<ROUTE fromNode='TimeSource' fromField='fraction_changed' toNode='camera3CameraDirAnim' toField='set_fraction'></ROUTE>
-	<ROUTE fromNode='camera3CameraLocAnim' fromField='value_changed' toNode='guidetrafo' toField='set_translation'></ROUTE>
-	<ROUTE fromNode='camera3CameraDirAnim' fromField='value_changed' toNode='guidetrafo' toField='set_rotation'></ROUTE>
-    	<ROUTE fromNode='camera3CameraLocAnim' fromField='value_changed' toNode='pChaser' toField='set_destination'></ROUTE>
+	<ROUTE fromNode='camera3CameraLocAnim' fromField='value_changed' toNode='pChaser' toField='set_destination'></ROUTE>
 	<ROUTE fromNode='camera3CameraDirAnim' fromField='value_changed' toNode='oChaser' toField='set_destination'></ROUTE>
     	<ROUTE fromNode='pChaser' fromField='value_changed' toNode='cam3trafo' toField='set_translation'></ROUTE>
 	<ROUTE fromNode='oChaser' fromField='value_changed' toNode='cam3trafo' toField='set_rotation'></ROUTE>
@@ -110,6 +108,18 @@
 	<viewpoint ID='CAM_1' DEF='CAM_1' orientation='0 -1 0 1.55005' position='6808.21 162.494 1193.7'></viewpoint>
 	<background id='bgnd' skyColor='0 0 0'></background>
       <group id='theScene'>
+	<transform DEF='guideTrafo' scale='0.5 2 0.2'>
+		<shape>
+			<appearance>
+				<material diffuseColor='1 0 0'></material>
+			</appearance>
+			<sphere></sphere>
+		</shape>
+	</transform>
+	      
+	<ROUTE fromNode='camera3CameraLocAnim' fromField='value_changed' toNode='guidetrafo' toField='set_translation'></ROUTE>
+	<ROUTE fromNode='camera3CameraDirAnim' fromField='value_changed' toNode='guidetrafo' toField='set_rotation'></ROUTE>
+    	
         <shape DEF='_G_1'>
           <appearance DEF='App_8'>
             <material DEF='AOPT_Material_136202744' ambientIntensity='0' diffuseColor='0.5 0.5 0.5' shininess='0.224609' specularColor='0.045 0.045 0.045'></material>
