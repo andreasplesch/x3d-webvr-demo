@@ -122,7 +122,7 @@ x3dom.registerNodeType(
             /**
              * Sets render information for stereo rendering.
              * @var {x3dom.fields.SFString} stereoMode
-             * @range ["NONE","LEFT_EYE","RIGHT_EYE"]
+             * @range ["NONE","LEFT_EYE","RIGHT_EYE","LEFT_MAT","RIGHT_MAT"]
              * @memberof x3dom.nodeTypes.RenderedTexture
              * @initvalue 'NONE'
              * @field x3dom
@@ -191,7 +191,17 @@ x3dom.registerNodeType(
              */
             this.addField_SFBool(ctx, 'oculusRiftVersion', 1);
 
-
+            /**
+             * Very experimental field to pass active navigator.vrdisplay index.
+             * set to 0 to enable default vrHMD
+             * @var {x3dom.fields.SFFloat} vrDisplay
+             * @memberof x3dom.nodeTypes.RenderedTexture
+             * @initvalue -1
+             * @field x3dom
+             * @instance
+             */
+            this.addField_SFFloat(ctx, 'vrDisplay', -1);
+        
             x3dom.debug.assert(this._vf.dimensions.length >= 3,
                 "RenderedTexture.dimensions requires at least 3 entries.");
             this._clearParents = true;
