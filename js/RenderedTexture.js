@@ -200,7 +200,7 @@ x3dom.registerNodeType(
              * @field x3dom
              * @instance
              */
-            this.addField_SFFloat(ctx, 'vrDisplay', -1);
+            this.addField_SFInt32(ctx, 'vrDisplay', -1);
         
             x3dom.debug.assert(this._vf.dimensions.length >= 3,
                 "RenderedTexture.dimensions requires at least 3 entries.");
@@ -218,6 +218,29 @@ x3dom.registerNodeType(
             {
                 this._clearParents = true;
                 this._needRenderUpdate = true;
+                
+                if (isWebVRSupported()) {
+                    navigator.getVRDisplays().then(vrDisplayCallback);
+                } else {
+                    console.error('No WebVR 1.0 support');
+                };
+                
+                function isWebVRSupported() {
+                    return ('getVRDisplays' in navigator);
+                };
+                
+                function vrDisplayCallback(vrdisplays) {
+                    if (vrdisplays.length) {
+                        vrHMD = vrdisplays[0];
+                        _log(vrHMD);
+                    } else {
+                        _log('NO VRDisplay found');
+                        alert("Didn't find a VR display!");
+                        return;
+                    }
+                };
+                
+                this._vrHMD = navigator.get
             },
 
             fieldChanged: function(fieldName)
