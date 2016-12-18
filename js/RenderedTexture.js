@@ -218,7 +218,11 @@ x3dom.registerNodeType(
             {
                 this._clearParents = true;
                 this._needRenderUpdate = true;
-                this._vrHMD = {};
+                this._vrHMD = null;
+                this._frameData = null;
+                if ('VRFrameData' in window) {
+                    this._frameData = new VRFrameData();
+                }
                 
                 if (this._vf.vrDisplay >= 0) {
                     if (isWebVRSupported()) {
@@ -307,16 +311,19 @@ x3dom.registerNodeType(
                 }
 
                 var stereoMode = this._vf.stereoMode.toUpperCase();
+                
+                //webVR support
                 if (stereoMode == "RIGHT_VR") {
-                    var vrViewMat = this._vrHMD.getEyeParameters('right').viewMatrix;
-                    ret_mat = mmatrixFromVrMat(vrViewMat).mult(ret_mat);
+                    this._vrHMD.getFrameData(this._frameData);
+                    ret_mat = mmatrixFromVrMat(this._frameData.rightViewMatrix).mult(ret_mat);
                     return ret_mat;
                 }
                 if (stereoMode == "LEFT_VR") {
-                    var vrViewMat = this._vrHMD.getEyeParameters('left').viewMatrix;
-                    ret_mat = mmatrixFromVrMat(vrViewMat).mult(ret_mat);
+                    this._vrHMD.getFrameData(this._frameData);
+                    ret_mat = mmatrixFromVrMat(this._frameData.leftViewMatrix).mult(ret_mat);
                     return ret_mat;
                 }
+                
                 if (stereoMode != "NONE")
                     var d = this._vf.interpupillaryDistance / 2;
                     if (stereoMode == "RIGHT_EYE") {
@@ -344,13 +351,13 @@ x3dom.registerNodeType(
                 var stereoMode = this._vf.stereoMode.toUpperCase();
 
                 if (stereoMode == "RIGHT_VR") {
-                    var vrViewMat = this._vrHMD.getEyeParameters('right').projectionMatrix;
-                    ret_mat = mmatrixFromVrMat(vrViewMat);
+                    this._vrHMD.getFrameData(this._frameData);
+                    ret_mat = mmatrixFromVrMat(this._frameData.rightProjectionMatrix);
                     return ret_mat;
                 }
                 if (stereoMode == "LEFT_VR") {
-                    var vrViewMat = this._vrHMD.getEyeParameters('left').projectionMatrix;
-                    ret_mat = mmatrixFromVrMat(vrViewMat);
+                    this._vrHMD.getFrameData(this._frameData);
+                    ret_mat = mmatrixFromVrMat(this._frameData.leftProjectionMatrix);
                     return ret_mat;
                 }
 
@@ -388,6 +395,10 @@ x3dom.registerNodeType(
 
                 return ret_mat;
             },
+                
+           matrixFromVrMatrix: function (vrMatrix) {
+               return matrixFromGL(vrMatrix);
+           }
 
             getWCtoCCMatrix: function()
             {
