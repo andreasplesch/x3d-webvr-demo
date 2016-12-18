@@ -122,7 +122,7 @@ x3dom.registerNodeType(
             /**
              * Sets render information for stereo rendering.
              * @var {x3dom.fields.SFString} stereoMode
-             * @range ["NONE","LEFT_EYE","RIGHT_EYE","LEFT_MAT","RIGHT_MAT"]
+             * @range ["NONE","LEFT_EYE","RIGHT_EYE","LEFT_VR","RIGHT_VR"]
              * @memberof x3dom.nodeTypes.RenderedTexture
              * @initvalue 'NONE'
              * @field x3dom
@@ -218,11 +218,14 @@ x3dom.registerNodeType(
             {
                 this._clearParents = true;
                 this._needRenderUpdate = true;
+                this._vrHMD = {};
                 
-                if (isWebVRSupported()) {
-                    navigator.getVRDisplays().then(vrDisplayCallback);
-                } else {
-                    console.error('No WebVR 1.0 support');
+                if (this._vf.vrDisplay >= 0) {
+                    if (isWebVRSupported()) {
+                        navigator.getVRDisplays().then(vrDisplayCallback);
+                    } else {
+                        console.error('No WebVR 1.0 support');
+                    };
                 };
                 
                 function isWebVRSupported() {
@@ -231,16 +234,14 @@ x3dom.registerNodeType(
                 
                 function vrDisplayCallback(vrdisplays) {
                     if (vrdisplays.length) {
-                        vrHMD = vrdisplays[0];
-                        _log(vrHMD);
+                        this._vrHMD = vrdisplays[this._vf.vrDisplay];
+                        x3dom.debug.log(vrHMD);
                     } else {
-                        _log('NO VRDisplay found');
-                        alert("Didn't find a VR display!");
+                        x3dom.debug.log('NO VRDisplay found');
+                        //alert("Didn't find a VR display!");
                         return;
                     }
                 };
-                
-                this._vrHMD = navigator.get
             },
 
             fieldChanged: function(fieldName)
@@ -298,7 +299,7 @@ x3dom.registerNodeType(
                 }
                 else if (locScene && locScene !== scene) {
                     // in case of completely local scene do not transform local viewpoint
-                    ret_mat = view.getViewMatrix()
+                    ret_mat = view.getViewMatrix();
                 }
                 else {
                     var mat_viewpoint = view.getCurrentTransform();
@@ -306,7 +307,17 @@ x3dom.registerNodeType(
                 }
 
                 var stereoMode = this._vf.stereoMode.toUpperCase();
-                if (stereoMode != "NONE") {
+                if (stereoMode == "RIGHT_VR") {
+                    var vrViewMat = this._vrHMD.getEyeParameters('right').viewMatrix;
+                    ret_mat = mmatrixFromVrMat(vrViewMat).mult(ret_mat);
+                    return ret_mat;
+                }
+                if (stereoMode == "LEFT_VR") {
+                    var vrViewMat = this._vrHMD.getEyeParameters('left').viewMatrix;
+                    ret_mat = mmatrixFromVrMat(vrViewMat).mult(ret_mat);
+                    return ret_mat;
+                }
+                if (stereoMode != "NONE")
                     var d = this._vf.interpupillaryDistance / 2;
                     if (stereoMode == "RIGHT_EYE") {
                         d = -d;
@@ -331,6 +342,18 @@ x3dom.registerNodeType(
                 var ret_mat = null;
                 var f, w = this._vf.dimensions[0], h = this._vf.dimensions[1];
                 var stereoMode = this._vf.stereoMode.toUpperCase();
+
+                if (stereoMode == "RIGHT_VR") {
+                    var vrViewMat = this._vrHMD.getEyeParameters('right').projectionMatrix;
+                    ret_mat = mmatrixFromVrMat(vrViewMat);
+                    return ret_mat;
+                }
+                if (stereoMode == "LEFT_VR") {
+                    var vrViewMat = this._vrHMD.getEyeParameters('left').projectionMatrix;
+                    ret_mat = mmatrixFromVrMat(vrViewMat);
+                    return ret_mat;
+                }
+
                 var stereo = (stereoMode != "NONE");
 
                 if (view === null || view === vbP) {
