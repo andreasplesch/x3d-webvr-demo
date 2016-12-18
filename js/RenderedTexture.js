@@ -315,12 +315,12 @@ x3dom.registerNodeType(
                 //webVR support
                 if (stereoMode == "RIGHT_VR") {
                     this._vrHMD.getFrameData(this._frameData);
-                    ret_mat = mmatrixFromVrMat(this._frameData.rightViewMatrix).mult(ret_mat);
+                    ret_mat = this.matrixFromVrMatrix(this._frameData.rightViewMatrix).mult(ret_mat);
                     return ret_mat;
                 }
                 if (stereoMode == "LEFT_VR") {
                     this._vrHMD.getFrameData(this._frameData);
-                    ret_mat = mmatrixFromVrMat(this._frameData.leftViewMatrix).mult(ret_mat);
+                    ret_mat = this.matrixFromVrMatrix(this._frameData.leftViewMatrix).mult(ret_mat);
                     return ret_mat;
                 }
                 
@@ -352,12 +352,12 @@ x3dom.registerNodeType(
 
                 if (stereoMode == "RIGHT_VR") {
                     this._vrHMD.getFrameData(this._frameData);
-                    ret_mat = mmatrixFromVrMat(this._frameData.rightProjectionMatrix);
+                    ret_mat = this.matrixFromVrMatrix(this._frameData.rightProjectionMatrix);
                     return ret_mat;
                 }
                 if (stereoMode == "LEFT_VR") {
                     this._vrHMD.getFrameData(this._frameData);
-                    ret_mat = mmatrixFromVrMat(this._frameData.leftProjectionMatrix);
+                    ret_mat = this.matrixFromVrMatrix(this._frameData.leftProjectionMatrix);
                     return ret_mat;
                 }
 
@@ -397,7 +397,11 @@ x3dom.registerNodeType(
             },
                 
            matrixFromVrMatrix: function (vrMatrix) {
-               return matrixFromGL(vrMatrix);
+               //vr matrix is in column major order like GL
+               //x3d is in row major order
+               //setFromArray does it
+               var mat = new x3dom.fields.SFMatrix4f();
+               return mat.setFromArray(vrMatrix);
            }
 
             getWCtoCCMatrix: function()
