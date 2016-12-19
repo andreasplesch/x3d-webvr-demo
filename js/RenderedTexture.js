@@ -239,7 +239,7 @@ x3dom.registerNodeType(
                 function vrDisplayCallback(vrdisplays) {
                     if (vrdisplays.length) {
                         this._vrHMD = vrdisplays[this._vf.vrDisplay];
-                        x3dom.debug.log(vrHMD);
+                        x3dom.debug.log(this._vrHMD);
                     } else {
                         x3dom.debug.log('NO VRDisplay found');
                         //alert("Didn't find a VR display!");
