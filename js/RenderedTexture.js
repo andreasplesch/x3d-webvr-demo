@@ -401,7 +401,8 @@ x3dom.registerNodeType(
                //x3d is in row major order
                //setFromArray does it
                var mat = new x3dom.fields.SFMatrix4f();
-               return mat.setFromArray(vrMatrix);
+               mat.setFromArray(vrMatrix);
+               return mat;
            },
 
             getWCtoCCMatrix: function()
