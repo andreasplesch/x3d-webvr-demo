@@ -324,7 +324,7 @@ x3dom.registerNodeType(
                     return ret_mat;
                 }
                 
-                if (stereoMode != "NONE")
+                if (stereoMode != "NONE") {
                     var d = this._vf.interpupillaryDistance / 2;
                     if (stereoMode == "RIGHT_EYE") {
                         d = -d;
