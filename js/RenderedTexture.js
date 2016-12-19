@@ -402,7 +402,7 @@ x3dom.registerNodeType(
                //setFromArray does it
                var mat = new x3dom.fields.SFMatrix4f();
                return mat.setFromArray(vrMatrix);
-           }
+           },
 
             getWCtoCCMatrix: function()
             {
