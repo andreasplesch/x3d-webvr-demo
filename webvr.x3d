@@ -3,7 +3,7 @@
     <shape>
       <appearance>
         <renderedtexture id="Webvr__rtLeft"
-          stereoMode="LEFT_EYE" update="ALWAYS"
+          stereoMode="LEFT_VR" update="ALWAYS"
           dimensions="1024 1024 4" repeatS="false" repeatT="false">
           <viewpoint  use="$VIEWPOINT"  containerfield="viewpoint"></viewpoint>
           <background use="$BACKGROUND" containerfield="background"></background>
@@ -50,7 +50,7 @@
     <shape>
       <appearance>
         <renderedtexture id="Webvr__rtRight"
-          stereoMode="RIGHT_EYE" update="ALWAYS"
+          stereoMode="RIGHT_VR" update="ALWAYS"
           dimensions="1024 1024 4" repeatS="false" repeatT="false">
           <viewpoint  use="$VIEWPOINT"  containerfield="viewpoint"></viewpoint>
           <background use="$BACKGROUND" containerfield="background"></background>
