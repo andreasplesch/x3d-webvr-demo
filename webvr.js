@@ -117,7 +117,7 @@ function init() {
     } else {
       vrHMD.requestAnimationFrame(enterFrame); // native framerate if presenting
     }
-
+/*
     var state = getPose(vrHMD);
 
     if (state.orientation !== null) {
@@ -137,7 +137,9 @@ function init() {
       posi.z = _initialPosition.z + p[2];
       viewpoint.releaseFieldRef('position');
     }
-
+*/
+    runtime.triggerRedraw();
+    
     if (vrHMD.isPresenting) {
       vrHMD.submitFrame();
     }
