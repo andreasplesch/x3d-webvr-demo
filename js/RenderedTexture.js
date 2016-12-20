@@ -225,7 +225,7 @@ x3dom.registerNodeType(
                     this._frameData = new VRFrameData();
                 }    
             
-                if (isWebVRRequested()) {
+                if (isWebVRRequested(this._vf.stereoMode.toUpperCase(), this._vf.vrDisplay)) {
                     if (isWebVRSupported()) {
                         navigator.getVRDisplays().then(vrDisplayCallback.bind(this));
                     } else {
@@ -233,11 +233,10 @@ x3dom.registerNodeType(
                     };
                 }
                 
-                function isWebVRRequested() {
-                    var stereoMode = this._vf.stereoMode.toUpperCase();
+                function isWebVRRequested(mode, display) {
                     return 
-                        this._vf.vrDisplay >= 0 &&
-                        (stereoMode == 'LEFT_VR' || stereoMode == 'RIGHT_VR');
+                        display >= 0 &&
+                        (mode == 'LEFT_VR' || mode == 'RIGHT_VR');
                 };
                 
                 function isWebVRSupported() {
