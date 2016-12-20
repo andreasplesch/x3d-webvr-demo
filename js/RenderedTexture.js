@@ -123,6 +123,7 @@ x3dom.registerNodeType(
              * Sets render information for stereo rendering.
              * @var {x3dom.fields.SFString} stereoMode
              * @range ["NONE","LEFT_EYE","RIGHT_EYE","LEFT_VR","RIGHT_VR"]
+             * set to *_VR to enable direct matrix control from HMD
              * @memberof x3dom.nodeTypes.RenderedTexture
              * @initvalue 'NONE'
              * @field x3dom
@@ -196,11 +197,11 @@ x3dom.registerNodeType(
              * set to 0 to enable default vrHMD
              * @var {x3dom.fields.SFFloat} vrDisplay
              * @memberof x3dom.nodeTypes.RenderedTexture
-             * @initvalue -1
+             * @initvalue 0
              * @field x3dom
              * @instance
              */
-            this.addField_SFInt32(ctx, 'vrDisplay', -1);
+            this.addField_SFInt32(ctx, 'vrDisplay', 0);
         
             x3dom.debug.assert(this._vf.dimensions.length >= 3,
                 "RenderedTexture.dimensions requires at least 3 entries.");
@@ -222,14 +223,21 @@ x3dom.registerNodeType(
                 this._frameData = null;
                 if ('VRFrameData' in window) {
                     this._frameData = new VRFrameData();
-                }
-                
-                if (this._vf.vrDisplay >= 0) {
+                }    
+            
+                if (isWebVRRequested()) {
                     if (isWebVRSupported()) {
                         navigator.getVRDisplays().then(vrDisplayCallback.bind(this));
                     } else {
                         console.error('No WebVR 1.0 support');
                     };
+                }
+                
+                function isWebVRRequested() {
+                    var stereoMode = this._vf.stereoMode.toUpperCase();
+                    return 
+                        this._vf.vrDisplay >= 0 &&
+                        (stereoMode == 'LEFT_VR' || stereoMode == 'RIGHT_VR');
                 };
                 
                 function isWebVRSupported() {
@@ -350,15 +358,15 @@ x3dom.registerNodeType(
                 var f, w = this._vf.dimensions[0], h = this._vf.dimensions[1];
                 var stereoMode = this._vf.stereoMode.toUpperCase();
 
-                if (stereoMode == "RIGHT_VR") {
+                if (stereoMode == "RIGHT_VR" || stereoMode == "LEFT_VR") {
+                    view = view || vbP;
+                    this._vrHMD.depthNear = view.getNear();
+                    this._vrHMD.depthFar = view.getFar();
                     this._vrHMD.getFrameData(this._frameData);
-                    ret_mat = this.matrixFromVrMatrix(this._frameData.rightProjectionMatrix);
-                    return ret_mat;
-                }
-                if (stereoMode == "LEFT_VR") {
-                    this._vrHMD.getFrameData(this._frameData);
-                    ret_mat = this.matrixFromVrMatrix(this._frameData.leftProjectionMatrix);
-                    return ret_mat;
+                    ret_mat = stereoMode == "RIGHT_VR"
+                        ? this._frameData.rightProjectionMatrix
+                        : this._frameData.leftProjectionMatrix ;
+                    return this.matrixFromVrMatrix(ret_mat);
                 }
 
                 var stereo = (stereoMode != "NONE");
