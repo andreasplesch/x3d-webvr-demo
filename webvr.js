@@ -138,6 +138,7 @@ function init() {
       viewpoint.releaseFieldRef('position');
     }
 */
+    runtime.triggerRedraw();
     if (vrHMD.isPresenting) {
       vrHMD.submitFrame();
     }
