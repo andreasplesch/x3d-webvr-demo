@@ -234,8 +234,7 @@ x3dom.registerNodeType(
                 }
                 
                 function isWebVRRequested(mode, display) {
-                    return 
-                        display >= 0 &&
+                    return display >= 0 &&
                         (mode == 'LEFT_VR' || mode == 'RIGHT_VR');
                 };
                 
