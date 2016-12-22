@@ -228,6 +228,9 @@ x3dom.registerNodeType(
                 if (isWebVRRequested(this._vf.stereoMode.toUpperCase(), this._vf.vrDisplay)) {
                     if (isWebVRSupported()) {
                         navigator.getVRDisplays().then(vrDisplayCallback.bind(this));
+                        var t0 = performance.now();
+                        while (this._vrHMD == null && performmance.no - t0 < 10000) { // wait ..
+                        }
                     } else {
                         console.error('No WebVR 1.0 support');
                     };
@@ -319,6 +322,7 @@ x3dom.registerNodeType(
                 var stereoMode = this._vf.stereoMode.toUpperCase();
                 
                 //webVR support
+                if (this._vrHMD !== null) { // sometimes called early before promise returns
                 if (stereoMode == "RIGHT_VR") {
                     this._vrHMD.getFrameData(this._frameData);
                     ret_mat = this.matrixFromVrMatrix(this._frameData.rightViewMatrix).mult(ret_mat);
