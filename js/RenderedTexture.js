@@ -322,7 +322,7 @@ x3dom.registerNodeType(
                 var stereoMode = this._vf.stereoMode.toUpperCase();
                 
                 //webVR support
-                if (this._vrHMD !== null) { // sometimes called early before promise returns
+                // if (this._vrHMD !== null) { // sometimes called early before promise returns
                 if (stereoMode == "RIGHT_VR") {
                     this._vrHMD.getFrameData(this._frameData);
                     ret_mat = this.matrixFromVrMatrix(this._frameData.rightViewMatrix).mult(ret_mat);
