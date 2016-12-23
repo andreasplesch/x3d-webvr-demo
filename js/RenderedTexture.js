@@ -229,7 +229,7 @@ x3dom.registerNodeType(
                     if (isWebVRSupported()) {
                         navigator.getVRDisplays().then(vrDisplayCallback.bind(this));
                         var t0 = performance.now();
-                        while (this._vrHMD == null && performance.now - t0 < 100000) { // wait ..
+                        while (this._vrHMD == null && performance.now() - t0 < 1000) { // wait ..
                         }
                     } else {
                         console.error('No WebVR 1.0 support');
