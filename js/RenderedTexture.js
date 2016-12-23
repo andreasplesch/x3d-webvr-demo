@@ -322,7 +322,7 @@ x3dom.registerNodeType(
                 var stereoMode = this._vf.stereoMode.toUpperCase();
                 
                 //webVR support
-                // if (this._vrHMD !== null) { // sometimes called early before promise returns
+                if (this._vrHMD !== null) { // sometimes called early before promise returns
                 if (stereoMode == "RIGHT_VR") {
                     this._vrHMD.getFrameData(this._frameData);
                     ret_mat = this.matrixFromVrMatrix(this._frameData.rightViewMatrix).mult(ret_mat);
@@ -332,6 +332,7 @@ x3dom.registerNodeType(
                     this._vrHMD.getFrameData(this._frameData);
                     ret_mat = this.matrixFromVrMatrix(this._frameData.leftViewMatrix).mult(ret_mat);
                     return ret_mat;
+                }
                 }
                 
                 if (stereoMode != "NONE") {
@@ -360,6 +361,8 @@ x3dom.registerNodeType(
                 var f, w = this._vf.dimensions[0], h = this._vf.dimensions[1];
                 var stereoMode = this._vf.stereoMode.toUpperCase();
 
+                if (this._vrHMD !== null) { // sometimes called early before promise returns
+                
                 if (stereoMode == "RIGHT_VR" || stereoMode == "LEFT_VR") {
                     view = view || vbP;
                     this._vrHMD.depthNear = view.getNear();
@@ -371,6 +374,8 @@ x3dom.registerNodeType(
                     return this.matrixFromVrMatrix(ret_mat);
                 }
 
+                }
+                
                 var stereo = (stereoMode != "NONE");
 
                 if (view === null || view === vbP) {
