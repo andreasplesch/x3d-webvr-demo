@@ -164,19 +164,19 @@ function init() {
   //wrap in div for default style
   var enterVRDiv = document.createElement('div');
   enterVRDiv.setAttribute('id', 'enter-vr-div');
-  enterVRDiv.style = '
-    background: rgba(0, 0, 0, .35) url("icon-goggles-white.svg") 50% 50% no-repeat;
-    background-size: 70% 70%;
-    color: #fff;
-    height: 50px;
-    width: 60px;
-    border: none;
-    background-color: rgba(120, 120, 120, .35);
-    padding: 1px 6px;
-    position:absolute;
-    top:10px;
-    left:10px;
-    cursor: pointer;
+  enterVRDiv.style = ' \
+    background: rgba(0, 0, 0, .35) url("icon-goggles-white.svg") 50% 50% no-repeat;\
+    background-size: 70% 70%;\
+    color: #fff;\
+    height: 50px;\
+    width: 60px;\
+    border: none;\
+    background-color: rgba(120, 120, 120, .35);\
+    padding: 1px 6px;\
+    position:absolute;\
+    top:10px;\
+    left:10px;\
+    cursor: pointer;\
   ';
   enterVRDiv.appendChild(enterVRBtn);
   document.body.appendChild(enterVRDiv);
