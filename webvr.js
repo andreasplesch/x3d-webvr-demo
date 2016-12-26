@@ -66,24 +66,26 @@ function load() {
   }
   _initialPosition = viewpoint.getFieldValue('position');
 
-  var xhr = new XMLHttpRequest();
+/*  var xhr = new XMLHttpRequest();
   xhr.open('GET', 'webvr.x3d');
   xhr.onreadystatechange = function() {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
         var text = xhr.responseText;
-
+*/
+        var text = getStereoX3D();
         text = text.replace(/\$VIEWPOINT/g, _viewpoint);
         text = text.replace(/\$BACKGROUND/g, _background);
         text = text.replace(/\$SCENE/g, _scene);
 
-        var node = document.createElement('group');
+        var node = document.createElement('Group');
         node.innerHTML = text;
 
         var scene = document.getElementById('scene');
         scene.appendChild(node);
 
         init();
+  /*
       } else {
         _log('error: could not load webvr.x3d');
       }
@@ -92,7 +94,8 @@ function load() {
 
   xhr.send();
 }
-
+*/
+  
 function init() {
   runtime = document.getElementById(_x3dEl).runtime;
 
@@ -290,5 +293,81 @@ function _log() {
   if (!enableLogging) return;
   console.log.apply(console, arguments);
 }
-
+  
+function getStereoX3D() {
+  var x3dText = '\
+<Group id="Webvr__stereoRt" render="true">\
+  <Group DEF="left">\
+    <Shape>\
+      <Appearance>\
+        <RenderedTexture id="Webvr__rtLeft"\
+          stereoMode="LEFT_VR" vrDisplay="0" update="ALWAYS"\
+          dimensions="1024 1024 4" repeatS="false" repeatT="false">\
+          <Viewpoint  USE="$VIEWPOINT"  containerField="Viewpoint"></Viewpoint>\
+          <Background USE="$BACKGROUND" containerField="Background"></Background>\
+          <Group      USE="$SCENE"      containerField="Scene"></Group>\
+        </RenderedTexture>\
+        <ComposedShader>\
+          <Field name="tex" type="SFInt32" value="0"></Field>\
+          <Field name="eye" type="SFInt32" value="-1.0"></Field>\
+          <Shaderpart DEF="vert" type="VERTEX">\
+          attribute vec3 position;\
+          attribute vec2 texcoord;\
+          \
+          uniform mat4 modelViewProjectionMatrix;\
+          uniform float eye;\
+          varying vec2 fragTexCoord;\
+          \
+          void main()\
+          {\
+            vec2 pos = sign(position.xy);\
+            fragTexCoord = texcoord;\
+            \
+            gl_Position = vec4((pos.x + 1.0 * eye) / 2.0, pos.y, 0.0, 1.0);\
+          }\
+          </Shaderpart>\
+          <Shaderpart DEF="frag" type="FRAGMENT">\
+          #ifdef GL_ES\
+          precision highp float;\
+          #endif\
+          \
+          uniform sampler2D tex;\
+          varying vec2 fragTexCoord;\
+          \
+          void main()\
+          {\
+            gl_FragColor = texture2D(tex, fragTexCoord);\
+          }\
+          </Shaderpart>\
+        </ComposedShader>\
+      </Appearance>\
+      <Plane solid="false"></Plane>\
+    </Shape>\
+  </Group>\
+  <Group DEF="right">\
+    <Shape>\
+      <Appearance>\
+        <RenderedTexture id="Webvr__rtRight"\
+          stereoMode="RIGHT_VR" vrDisplay="0" update="ALWAYS"\
+          dimensions="1024 1024 4" repeatS="false" repeatT="false">\
+          <Viewpoint  USE="$VIEWPOINT"  containerField="Viewpoint"></Viewpoint>\
+          <Background USE="$BACKGROUND" containerField="Background"></Background>\
+          <Group      USE="$SCENE"      containerField="Scene"></Group>\
+        </RenderedTexture>\
+        <ComposedShader>\
+          <Field name="tex" type="SFInt32" value="0"></Field>\
+          <Field name="eye" type="SFInt32" value="1.0"></Field>\
+          <Shaderpart USE="vert" type="VERTEX">\
+          </Shaderpart>\
+          <Shaderpart USE="frag" type="FRAGMENT">\
+          </Shaderpart>\
+        </ComposedShader>\
+      </Appearance>\
+      <Plane solid="false"></Plane>\
+    </Shape>\
+  </Group>\
+</Group>\
+';
+  return x3dText;
+}
 })();
