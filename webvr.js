@@ -161,9 +161,7 @@ function init() {
   // inject enter/exit VR button
   var enterVRBtn = document.createElement('button');
   enterVRBtn.setAttribute('id', 'enter-vr-btn');
-  //wrap in div for default style
   var enterVRStyle = document.createElement('style');
-  //enterVRDiv.setAttribute('id', 'enter-vr-div');
   enterVRStyle.textContent = ' .enter-vr-default {\
     background: rgba(0, 0, 0, .35) url("icon-goggles-white.svg") 50% 50% no-repeat;\
     background-size: 70% 70%;\
@@ -178,9 +176,7 @@ function init() {
     left:10px;\
     cursor: pointer;\
   }';
-  //enterVRDiv.appendChild(enterVRBtn);
   enterVRBtn.setAttribute('class', 'enter-vr-default enter-vr-custom');
-  
   document.head.appendChild(enterVRStyle);
   document.body.appendChild(enterVRBtn);
   enterVRBtn.addEventListener('click', function(event){
