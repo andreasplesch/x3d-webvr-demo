@@ -57,7 +57,7 @@ function _initialize( options ) {
 WebVRSupport.initialize = _initialize;
 
 function load() {
-  _log('Load external webvr.x3d dependency');
+  _log('Inject webvr x3d nodes');
 
   viewpoint = document.getElementById(_viewpoint);
   if (viewpoint === null) {
