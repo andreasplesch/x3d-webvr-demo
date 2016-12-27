@@ -213,12 +213,13 @@ function enterVR() {
 
   if (!vrHMD.isPresenting) {
     var canvas = document.getElementsByTagName("canvas")[0];
-    var leftEye = vrHMD.getEyeParameters("left");
-    var rightEye = vrHMD.getEyeParameters("right");
-    canvas.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
-    canvas.height = Math.max(leftEye.renderHeight, rightEye.renderHeight);
     vrHMD.requestPresent( [ { source: canvas } ] )
       .then(function(){
+        var canvas = document.getElementsByTagName("canvas")[0];
+        var leftEye = vrHMD.getEyeParameters("left");
+        var rightEye = vrHMD.getEyeParameters("right");
+        canvas.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
+        canvas.height = Math.max(leftEye.renderHeight, rightEye.renderHeight);
         _log('Started VR presenting');
     });
   } else {
@@ -249,15 +250,17 @@ function vrDisplayCallback(vrdisplays) {
   _log(leftEyeParams);
   _log(rightEyeParams);
 
-  leftFOV = leftEyeParams.fieldOfView;
-  rightFOV = rightEyeParams.fieldOfView;
-  _log(leftFOV);
-  _log(rightFOV);
-
+  if (leftEyeParams !== null) { 
+    leftFOV = leftEyeParams.fieldOfView;
+    rightFOV = rightEyeParams.fieldOfView;
+  
   // TODO: use to updated views
   // -currently using default in x3dom: 0.064 IPD
-  leftTranslation = leftEyeParams.offset;
-  rightTranslation = rightEyeParams.offset;
+    leftTranslation = leftEyeParams.offset;
+    rightTranslation = rightEyeParams.offset;
+  }
+  _log(leftFOV);
+  _log(rightFOV);
   _log(leftTranslation);
   _log(rightTranslation);
 
