@@ -213,6 +213,10 @@ function enterVR() {
 
   if (!vrHMD.isPresenting) {
     var canvas = document.getElementsByTagName("canvas")[0];
+    var leftEye = vrHMD.getEyeParameters("left");
+    var rightEye = vrHMD.getEyeParameters("right");
+    canvas.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
+    canvas.height = Math.max(leftEye.renderHeight, rightEye.renderHeight);
     vrHMD.requestPresent( [ { source: canvas } ] )
       .then(function(){
         _log('Started VR presenting');
