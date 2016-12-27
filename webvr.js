@@ -183,7 +183,7 @@ function init() {
   }';
   enterVRBtn.setAttribute('class', 'enter-vr-default enter-vr-custom');
   document.head.appendChild(enterVRStyle);
-  document.body.appendChild(enterVRBtn);
+  runtime.doc.appendChild(enterVRBtn);
   enterVRBtn.addEventListener('click', function(event){
     enterVR();
   });
