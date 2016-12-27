@@ -28,7 +28,7 @@ body {
   padding: 0;
 }
 
-#enter-vr-btn-removed {
+#enter-vr-btn-not-used {
   background: rgba(0, 0, 0, .35) url("icon-goggles-white.svg") 50% 50% no-repeat;
   background-size: 70% 70%;
   color: #fff;
@@ -76,9 +76,6 @@ body {
     orientation='0 1 0 2.99229'
     position='4.17102 1.00905 -6.97228'
     znear="0.001" zfar="300"></viewpoint>
-  <viewpoint def='AOPT_CAM'
-    centerofrotation='3.4625 1.73998 -5.55'
-    position='3.4625 1.73998 8.69028'></viewpoint>
   <background DEF='bgnd' skyColor="0 0 0"></background>
 
   <group id='root' render='false'>
@@ -129,9 +126,10 @@ body {
         </binaryGeometry>
       </shape>
     </group>
-
   </group>
-
+<viewpoint def='AOPT_CAM'
+    centerofrotation='3.4625 1.73998 -5.55'
+    position='3.4625 1.73998 8.69028'></viewpoint>
 </scene>
 </x3d>
 
