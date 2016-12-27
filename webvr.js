@@ -327,9 +327,9 @@ function getStereoX3D() {
           }\
           </Shaderpart>\
           <Shaderpart DEF="frag" type="FRAGMENT">\
-          #ifdef GL_ES\
-          precision highp float;\
-          #endif\
+          #ifdef GL_ES \n\
+          precision highp float; \n\
+          #endif \n\
           \
           uniform sampler2D tex;\
           varying vec2 fragTexCoord;\
