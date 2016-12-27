@@ -93,9 +93,9 @@ function load() {
   }
 
   xhr.send();
-}
 */
-  
+}
+
 function init() {
   runtime = document.getElementById(_x3dEl).runtime;
 
