@@ -81,7 +81,7 @@ function load() {
         var node = document.createElement('Group');
         node.innerHTML = text;
 
-        var scene = document.getElementById('scene');
+        var scene = document.querySelector('Scene');
         scene.appendChild(node);
 
         init();
