@@ -303,9 +303,9 @@ function getStereoX3D() {
         <RenderedTexture id="Webvr__rtLeft"\
           stereoMode="LEFT_VR" vrDisplay="0" update="ALWAYS"\
           dimensions="1024 1024 4" repeatS="false" repeatT="false">\
-          <Viewpoint  USE="$VIEWPOINT"  containerField="Viewpoint"></Viewpoint>\
-          <Background USE="$BACKGROUND" containerField="Background"></Background>\
-          <Group      USE="$SCENE"      containerField="Scene"></Group>\
+          <Viewpoint  USE="$VIEWPOINT"  containerField="viewpoint"></Viewpoint>\
+          <Background USE="$BACKGROUND" containerField="background"></Background>\
+          <Group      USE="$SCENE"      containerField="scene"></Group>\
         </RenderedTexture>\
         <ComposedShader>\
           <Field name="tex" type="SFInt32" value="0"></Field>\
@@ -350,9 +350,9 @@ function getStereoX3D() {
         <RenderedTexture id="Webvr__rtRight"\
           stereoMode="RIGHT_VR" vrDisplay="0" update="ALWAYS"\
           dimensions="1024 1024 4" repeatS="false" repeatT="false">\
-          <Viewpoint  USE="$VIEWPOINT"  containerField="Viewpoint"></Viewpoint>\
-          <Background USE="$BACKGROUND" containerField="Background"></Background>\
-          <Group      USE="$SCENE"      containerField="Scene"></Group>\
+          <Viewpoint  USE="$VIEWPOINT"  containerField="viewpoint"></Viewpoint>\
+          <Background USE="$BACKGROUND" containerField="background"></Background>\
+          <Group      USE="$SCENE"      containerField="scene"></Group>\
         </RenderedTexture>\
         <ComposedShader>\
           <Field name="tex" type="SFInt32" value="0"></Field>\
