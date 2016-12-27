@@ -310,7 +310,7 @@ function getStereoX3D() {
         <ComposedShader>\
           <Field name="tex" type="SFInt32" value="0"></Field>\
           <Field name="eye" type="SFInt32" value="-1.0"></Field>\
-          <Shaderpart DEF="vert" type="VERTEX">\
+          <ShaderPart DEF="vert" type="VERTEX">\
           attribute vec3 position;\
           attribute vec2 texcoord;\
           \
@@ -325,8 +325,8 @@ function getStereoX3D() {
             \
             gl_Position = vec4((pos.x + 1.0 * eye) / 2.0, pos.y, 0.0, 1.0);\
           }\
-          </Shaderpart>\
-          <Shaderpart DEF="frag" type="FRAGMENT">\
+          </ShaderPart>\
+          <ShaderPart DEF="frag" type="FRAGMENT">\
           #ifdef GL_ES \n\
           precision highp float; \n\
           #endif \n\
@@ -338,7 +338,7 @@ function getStereoX3D() {
           {\
             gl_FragColor = texture2D(tex, fragTexCoord);\
           }\
-          </Shaderpart>\
+          </ShaderPart>\
         </ComposedShader>\
       </Appearance>\
       <Plane solid="false"></Plane>\
