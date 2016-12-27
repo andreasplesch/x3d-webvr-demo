@@ -367,6 +367,10 @@ function getStereoX3D() {
     </Shape>\
   </Group>\
 </Group>\
+<Viewpoint DEF="WEBVR_AOPT_CAM"\
+    centerOfRotation="3.4625 1.73998 -5.55"\
+    position="3.4625 1.73998 8.69028"\
+</Viewpoint>\
 ';
   return x3dText;
 }
