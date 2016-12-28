@@ -222,15 +222,17 @@ function enterVR() {
         var leftEye = vrHMD.getEyeParameters("left");
         var rightEye = vrHMD.getEyeParameters("right");
       //attributes override all styles
-        runtime.doc.setAttribute('width', Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2);
-        runtime.doc.setAttribute('height', Math.max(leftEye.renderHeight, rightEye.renderHeight));
+        var canvas = runtime.canvas.canvas;
+        canvas.style.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2 + 'px';
+        canvas.style.height = Math.max(leftEye.renderHeight, rightEye.renderHeight) + 'px';
         _log('Started VR presenting');
     });
   } else {
     vrHMD.exitPresent().then(function(){
       //restore attributes, or if null, styles
-      runtime.doc.setAttribute('width', _x3dSize.width);
-      runtime.doc.setAttribute('height', _x3dSize.height);  
+      var canvas = runtime.canvas.canvas;
+      canvas.style.width = _x3dSize.width + 'px';
+      canvas.style.height = _x3dSize.height + 'px';  
       _log('Exited VR presenting');
     });
   }
