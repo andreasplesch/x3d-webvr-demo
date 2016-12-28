@@ -100,9 +100,8 @@ function init() {
   runtime = document.getElementById(_x3dEl).runtime;
   //save original size
   _x3dSize.height = runtime.doc.getAttribute('height');
-  _x3dSize.width = ruuntime.doc.getAttribute('width');
+  _x3dSize.width = runtime.doc.getAttribute('width');
   
-
   var ns = "";
   ns = "Webvr__";
   rtLeft = document.getElementById(ns+'rtLeft');
@@ -216,19 +215,20 @@ function enterVR() {
   }
 
   if (!vrHMD.isPresenting) {
-    var runtime = document.getElementById(_x3dEl).runtime;
+    //var runtime.doc.setAttribute('width')ntime = document.getElementById(_x3dEl).runtime;
     var canvas = runtime.canvas.canvas;
     vrHMD.requestPresent( [ { source: canvas } ] )
       .then(function(){
-        var x3dele = document.getElementById(_x3dEl);
         var leftEye = vrHMD.getEyeParameters("left");
         var rightEye = vrHMD.getEyeParameters("right");
-        canvas.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
-        canvas.height = Math.max(leftEye.renderHeight, rightEye.renderHeight);
+        runtime.doc.setAttribute('width') = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
+        runtime.doc.setAttribute('height') = Math.max(leftEye.renderHeight, rightEye.renderHeight);
         _log('Started VR presenting');
     });
   } else {
     vrHMD.exitPresent().then(function(){
+      runtime.doc.setAttribute('width') = _x3dSize.width;
+      runtime.doc.setAttribute('height') = _x3dSize.height;  
       _log('Exited VR presenting');
     });
   }
