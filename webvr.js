@@ -21,8 +21,8 @@ var _background = "background";
 var _scene = "scene";
 
 var _x3dEl = "x3d-elem";
-
-
+var _x3dSize = null;
+  
 var viewpoint;
 var _initialPosition;
 
@@ -98,6 +98,10 @@ function load() {
 
 function init() {
   runtime = document.getElementById(_x3dEl).runtime;
+  //save original size
+  _x3dSize.height = runtime.doc.getAttribute('height');
+  _x3dSize.width = ruuntime.doc.getAttribute('width');
+  
 
   var ns = "";
   ns = "Webvr__";
@@ -212,10 +216,11 @@ function enterVR() {
   }
 
   if (!vrHMD.isPresenting) {
-    var canvas = document.getElementsByTagName("canvas")[0];
+    var runtime = document.getElementById(_x3dEl).runtime;
+    var canvas = runtime.canvas.canvas;
     vrHMD.requestPresent( [ { source: canvas } ] )
       .then(function(){
-        var canvas = document.getElementsByTagName("canvas")[0];
+        var x3dele = document.getElementById(_x3dEl);
         var leftEye = vrHMD.getEyeParameters("left");
         var rightEye = vrHMD.getEyeParameters("right");
         canvas.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
