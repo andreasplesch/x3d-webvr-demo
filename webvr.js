@@ -206,6 +206,8 @@ function init() {
     position: absolute;\
     z-index: 999;\
     display: none;\
+    font-family: monospace;\
+    font-size: 24px;\
   }';
   enterVRPrompt.setAttribute('class', 'enter-vr-prompt-default enter-vr-prompt-custom');
   document.head.appendChild(enterVRPromptStyle);
