@@ -27,7 +27,9 @@ var viewpoint;
 var _initialPosition;
 
 var enterVRPrompt;
-var _enterVRMessage = 'Ready to use VR head set !'
+var _enterVRMessage = 'Ready to use VR head set !';
+var _mirrorDisplay = false;
+var _scaleToHMD = true;
 
 /*
 options
@@ -45,9 +47,13 @@ function _initialize( options ) {
     _renderScale = options.renderScale;
   if (options.x3dEl)
     _x3dEl = options.x3dEl;
-if (options.enterVRMessage)
+  if (options.enterVRMessage)
     _enterVRMessage = options.enterVRMessage;
-
+  if (options.mirrorDisplay)
+    _mirrorDisplay = options.mirrorDisplay;
+  if (options.scaleToHMD)
+    _scaleToHMD = options.scaleToHMD;
+  
   if (document.readyState === 'complete') {
     load();
   } else {
@@ -206,6 +212,7 @@ function init() {
     position: absolute;\
     z-index: 999;\
     display: none;\
+    padding: 100px;\
     font-family: monospace;\
     font-size: 24px;\
   }';
@@ -246,9 +253,11 @@ function enterVR() {
         var rightEye = vrHMD.getEyeParameters("right");
       //attributes override all styles
         var canvas = runtime.canvas.canvas;
-        canvas.style.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2 + 'px';
-        canvas.style.height = Math.max(leftEye.renderHeight, rightEye.renderHeight) + 'px';
-        enterVRPrompt.style.display = 'block'; 
+        if (_scaleToHMD) {
+          canvas.style.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2 + 'px';
+          canvas.style.height = Math.max(leftEye.renderHeight, rightEye.renderHeight) + 'px';
+        }
+        if (!_mirrorDisplay) enterVRPrompt.style.display = 'block'; 
         _log('Started VR presenting');
     });
   } else {
