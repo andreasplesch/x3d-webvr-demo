@@ -255,8 +255,8 @@ function enterVR() {
     vrHMD.exitPresent().then(function(){
       //restore attributes, or if null, styles
       var canvas = runtime.canvas.canvas;
-      canvas.style.width = _x3dSize.width + 'px';
-      canvas.style.height = _x3dSize.height + 'px';
+      canvas.style.width = _x3dSize.width;
+      canvas.style.height = _x3dSize.height;
       enterVRPrompt.style.display = 'none';
       _log('Exited VR presenting');
     });
