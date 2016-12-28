@@ -124,7 +124,7 @@ function init() {
   //runtime.enterFrame = enterFrame;
 
   requestAnimationFrame(enterFrame);
-
+ 
   // update viewpoint based on HMD pose
   function enterFrame() {
     if (!vrHMD) {
@@ -154,7 +154,7 @@ function init() {
       viewpoint.releaseFieldRef('position');
     }
 */
-    runtime.triggerRedraw();
+    runtime.triggerRedraw(); //necessary since no mutations anymore
     if (vrHMD.isPresenting) {
       vrHMD.submitFrame();
     }
@@ -277,6 +277,7 @@ WebVRSupport.enterVR = enterVR;
 function vrDisplayCallback(vrdisplays) {
   if (vrdisplays.length) {
     vrHMD = vrdisplays[0];
+    window.requestAnimFrame = vrHMD.requestAnimationFrame ; // x3dom uses this; for internal animations; probably not necessary
     _log(vrHMD);
   } else {
     _log('NO VRDisplay found');
