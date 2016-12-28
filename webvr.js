@@ -21,7 +21,7 @@ var _background = "background";
 var _scene = "scene";
 
 var _x3dEl = "x3d-elem";
-var _x3dSize = null;
+var _x3dSize = {};
   
 var viewpoint;
 var _initialPosition;
@@ -221,14 +221,16 @@ function enterVR() {
       .then(function(){
         var leftEye = vrHMD.getEyeParameters("left");
         var rightEye = vrHMD.getEyeParameters("right");
+      //attributes override all styles
         runtime.doc.setAttribute('width') = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
         runtime.doc.setAttribute('height') = Math.max(leftEye.renderHeight, rightEye.renderHeight);
         _log('Started VR presenting');
     });
   } else {
     vrHMD.exitPresent().then(function(){
-      runtime.doc.setAttribute('width') = _x3dSize.width;
-      runtime.doc.setAttribute('height') = _x3dSize.height;  
+      //restore attributes, or if null, styles
+      runtime.doc.setAttribute('width', _x3dSize.width);
+      runtime.doc.setAttribute('height', _x3dSize.height);  
       _log('Exited VR presenting');
     });
   }
