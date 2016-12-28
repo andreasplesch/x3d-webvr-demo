@@ -26,6 +26,9 @@ var _x3dSize = {};
 var viewpoint;
 var _initialPosition;
 
+var enterVRPrompt;
+var _enterVRMessage = 'Ready to use VR head set !'
+
 /*
 options
 */
@@ -40,9 +43,10 @@ function _initialize( options ) {
     _scene = options.scene;
   if (options.renderScale)
     _renderScale = options.renderScale;
-
   if (options.x3dEl)
     _x3dEl = options.x3dEl;
+if (options.enterVRMessage)
+    _enterVRMessage = options.enterVRMessage;
 
   if (document.readyState === 'complete') {
     load();
@@ -190,6 +194,23 @@ function init() {
   enterVRBtn.addEventListener('click', function(event){
     enterVR();
   });
+  
+  //create mask with headset prompt
+  enterVRPrompt = document.createElement('div');
+  enterVRPrompt.textContent = _enterVRMessage ;
+  var enterVRPromptStyle = document.createElement('style');
+  enterVRPromptStyle.textContent = ' .enter-vr-prompt-default {\
+    background: grey;\
+    width: 100%;\
+    height: 100%;\
+    position: absolute;\
+    z-index: 999;\
+    display: none;\
+  }';
+  enterVRPrompt.setAttribute('class', 'enter-vr-prompt-default enter-vr-prompt-custom');
+  document.head.appendChild(enterVRPromptStyle);
+  runtime.doc.appendChild(enterVRPrompt);
+  
 };
 
 function isWebVRSupported() {
@@ -225,6 +246,7 @@ function enterVR() {
         var canvas = runtime.canvas.canvas;
         canvas.style.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2 + 'px';
         canvas.style.height = Math.max(leftEye.renderHeight, rightEye.renderHeight) + 'px';
+        enterVRPrompt.style.display = 'block'; 
         _log('Started VR presenting');
     });
   } else {
@@ -232,7 +254,8 @@ function enterVR() {
       //restore attributes, or if null, styles
       var canvas = runtime.canvas.canvas;
       canvas.style.width = _x3dSize.width + 'px';
-      canvas.style.height = _x3dSize.height + 'px';  
+      canvas.style.height = _x3dSize.height + 'px';
+      enterVRPrompt.style.display = 'none';
       _log('Exited VR presenting');
     });
   }
