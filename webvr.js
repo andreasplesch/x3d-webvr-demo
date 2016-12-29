@@ -114,8 +114,8 @@ function init() {
   
   var ns = "";
   ns = "Webvr__";
-  rtLeft = document.getElementById(ns+'rtLeft');
-  rtRight = document.getElementById(ns+'rtRight');
+  rtLeft = document.getElementById( ns + 'rtLeft');
+  rtRight = document.getElementById( ns + 'rtRight');
 
 
   disableControls();
@@ -249,7 +249,6 @@ function enterVR() {
   }
 
   if (!vrHMD.isPresenting) {
-    //var runtime.doc.setAttribute('width')ntime = document.getElementById(_x3dEl).runtime;
     var canvas = runtime.canvas.canvas;
     vrHMD.requestPresent( [ { source: canvas } ] )
       .then(function(){
@@ -261,7 +260,8 @@ function enterVR() {
           canvas.style.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2 + 'px';
           canvas.style.height = Math.max(leftEye.renderHeight, rightEye.renderHeight) + 'px';
         }
-        if (!_mirrorDisplay) enterVRPrompt.style.display = 'block'; 
+        if (!_mirrorDisplay && vrHMD.capabilities.hasExternalDisplay) // skip if mobile or explicit mirroring
+          enterVRPrompt.style.display = 'block'; //show message
         _log('Started VR presenting');
     });
   } else {
