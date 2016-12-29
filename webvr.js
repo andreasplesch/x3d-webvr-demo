@@ -27,7 +27,7 @@ var viewpoint;
 var _initialPosition;
 
 var enterVRPrompt;
-var _enterVRMessage = 'Ready to use VR head set !';
+var _enterVRMessage = 'Ready to use VR headset !';
 var _mirrorDisplay = false;
 var _scaleToHMD = true;
 
@@ -193,6 +193,9 @@ function init() {
     transition: background-color .05s ease;\
     -webkit-transition: background-color .05s ease;\
     z-index: 9999;\
+  }\
+  .enter-vr-default:hover {\
+    background-color: rgba(120, 120, 120, .65);\
   }';
   enterVRBtn.setAttribute('class', 'enter-vr-default enter-vr-custom');
   document.head.appendChild(enterVRStyle);
