@@ -211,6 +211,7 @@ function init() {
     height: 100%;\
     position: absolute;\
     z-index: 999;\
+    box-sizing: border-box;\
     display: none;\
     padding: 100px;\
     font-family: monospace;\
