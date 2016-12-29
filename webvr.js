@@ -79,7 +79,7 @@ function load() {
   // disable direct rendering, by wrapping content in non-rendered group
   var rootGroup = document.createElement('Group');
   rootGroup.setAttribute('render', 'false');
-  var theScene = document.querySelector( '[DEF="' + _scene + '"]' ));
+  var theScene = document.querySelector( '[DEF="' + _scene + '"]' );
   theScene.parentNode.appendChild(rootGroup);
   rootGroup.appendChild(theScene);
 
