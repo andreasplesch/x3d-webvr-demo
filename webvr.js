@@ -80,9 +80,10 @@ function load() {
   var rootGroup = document.createElement('Group');
   rootGroup.setAttribute('render', 'false');
   var theScene = document.querySelector( '[DEF="' + _scene + '"]' );
-  var parentNode = theScene.parentNode;
+  theScene.parentNode.appendChild(rootGroup);
+  var sceneContent = theScene.removeChild(); //x3dom needs step by step
   rootGroup.appendChild(theScene);
-  parentNode.appendChild(rootGroup);
+  theScene.appendChild(sceneContent);
   
 /*  var xhr = new XMLHttpRequest();
   xhr.open('GET', 'webvr.x3d');
