@@ -49,9 +49,9 @@ function _initialize( options ) {
     _x3dEl = options.x3dEl;
   if (options.enterVRMessage)
     _enterVRMessage = options.enterVRMessage;
-  if (options.mirrorDisplay)
+  if (options.mirrorDisplay !== null)
     _mirrorDisplay = options.mirrorDisplay;
-  if (options.scaleToHMD)
+  if (options.scaleToHMD !== null)
     _scaleToHMD = options.scaleToHMD;
   
   if (document.readyState === 'complete') {
