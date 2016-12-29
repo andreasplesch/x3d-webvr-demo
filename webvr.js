@@ -75,6 +75,9 @@ function load() {
     return;
   }
   _initialPosition = viewpoint.getFieldValue('position');
+  
+  // disable direct rendering, does not affect RTs
+  document.getElementById(_scene).setAttribute('render', 'false');
 
 /*  var xhr = new XMLHttpRequest();
   xhr.open('GET', 'webvr.x3d');
