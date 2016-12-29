@@ -79,7 +79,9 @@ function load() {
   // disable direct rendering, by wrapping content in non-rendered group
   var rootGroup = document.createElement('Group');
   rootGroup.setAttribute('render', 'false');
-  rootGroup.appendChild(document.querySelector( '[DEF="' + _scene + '"]' ));
+  var theScene = document.querySelector( '[DEF="' + _scene + '"]' ));
+  theScene.parentNode.appendChild(rootGroup);
+  rootGroup.appendChild(theScene);
 
 /*  var xhr = new XMLHttpRequest();
   xhr.open('GET', 'webvr.x3d');
