@@ -80,9 +80,10 @@ function load() {
   var rootGroup = document.createElement('Group');
   rootGroup.setAttribute('render', 'false');
   var theScene = document.querySelector( '[DEF="' + _scene + '"]' );
-  theScene.parentNode.appendChild(rootGroup);
+  var parentNode = theScene.parentNode;
   rootGroup.appendChild(theScene);
-
+  parentNode.appendChild(rootGroup);
+  
 /*  var xhr = new XMLHttpRequest();
   xhr.open('GET', 'webvr.x3d');
   xhr.onreadystatechange = function() {
