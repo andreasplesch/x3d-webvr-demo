@@ -77,14 +77,19 @@ function load() {
   _initialPosition = viewpoint.getFieldValue('position');
   
   // disable direct rendering, by wrapping content in non-rendered group
+  /*
   var rootGroup = document.createElement('Group');
   rootGroup.setAttribute('render', 'false');
   var theScene = document.querySelector( '[DEF="' + _scene + '"]' );
   theScene.parentNode.appendChild(rootGroup);
-  var sceneContent = theScene.removeChild(); //x3dom needs step by step
+  var sceneContent = []; //x3dom needs step by step
+  while (theScene.firstChild) {
+    sceneContent.push(theScene.removeChild(theScene.firstChild));
+  }
+  //var sceneContent = theScene.removeChild(); 
   rootGroup.appendChild(theScene);
   theScene.appendChild(sceneContent);
-  
+  */
 /*  var xhr = new XMLHttpRequest();
   xhr.open('GET', 'webvr.x3d');
   xhr.onreadystatechange = function() {
