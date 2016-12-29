@@ -77,7 +77,7 @@ function load() {
   _initialPosition = viewpoint.getFieldValue('position');
   
   // disable direct rendering, does not affect RTs
-  document.querySelector('[DEF="'+_scene+'"]').setAttribute('render', 'false');
+  document.querySelector('[DEF="'+_scene+'"]').setAttribute('render', 'true');
 
 /*  var xhr = new XMLHttpRequest();
   xhr.open('GET', 'webvr.x3d');
