@@ -272,10 +272,10 @@ function enterVR() {
       //attributes override all styles
         var canvas = runtime.canvas.canvas;
         if (_scaleToHMD) {
-          canvas.width = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
-          //canvas.style.width = canvas.width + 'px';
-          canvas.height = Math.max(leftEye.renderHeight, rightEye.renderHeight);
-          //canvas.style.height = canvas.style.height + 'px';
+          var canvasWidth = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2;
+          canvas.style.width = canvasWidth + 'px'; // x3dom sets canvas.width/height from style
+          var canvasHeight = Math.max(leftEye.renderHeight, rightEye.renderHeight);
+          canvas.style.height = canvasHeight + 'px';
         }
         if (!_mirrorDisplay && vrHMD.capabilities.hasExternalDisplay) // skip if mobile or explicit mirroring
           enterVRPrompt.style.display = 'block'; //show message
@@ -285,8 +285,8 @@ function enterVR() {
     vrHMD.exitPresent().then(function(){
       //restore attributes, or if null, styles
       var canvas = runtime.canvas.canvas;
-      canvas.width = _x3dSize.width;
-      canvas.height = _x3dSize.height;
+      canvas.style.width = _x3dSize.width + 'px';
+      canvas.style.height = _x3dSize.height + 'px';
       enterVRPrompt.style.display = 'none';
       _log('Exited VR presenting');
     });
