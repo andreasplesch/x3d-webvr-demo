@@ -124,8 +124,8 @@ function load() {
 function init() {
   runtime = document.getElementById(_x3dEl).runtime;
   //save original size
-  _x3dSize.height = runtime.doc.getAttribute('height');
-  _x3dSize.width = runtime.doc.getAttribute('width');
+  _x3dSize.height = runtime.canvas.canvas.getAttribute('height');
+  _x3dSize.width = runtime.canvas.canvas.getAttribute('width');
   
   var ns = "";
   ns = "Webvr__";
