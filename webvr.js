@@ -82,11 +82,11 @@ function load() {
   rootGroup.setAttribute('render', 'false');
   var theScene = document.querySelector( '[DEF="' + _scene + '"]' );
   theScene.parentNode.appendChild(rootGroup);
-  var sceneGroup = document.createElement('Group');
-  sceneGroup.setAttribute('DEF', _scene);
+  var sceneGroup = theScene.cloneNode(true);
+  //sceneGroup.setAttribute('DEF', _scene);
   //x3dom needs step by step removal
   while (theScene.firstChild) {
-    sceneGroup.appendChild( theScene.removeChild( theScene.firstChild ) );
+    theScene.removeChild( theScene.firstChild ) ;
   }
   theScene.parentNode.removeChild(theScene);
   rootGroup.appendChild(sceneGroup);
