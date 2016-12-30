@@ -19,8 +19,7 @@
           <Background id='bgnd' skyColor='0.0 0.0 0.0'/>
           <Viewpoint id='vp' position='0 0 1' description='Default' zNear='0.0001' zFar='100'/>
           
-          <Group DEF='theScene'>
-            <Transform rotation='1 0 0 1.57'>
+          <Transform rotation='1 0 0 1.57' DEF='theScene'>
             <VolumeData id='volume' dimensions='1.0 1.0 1.0'>
               <ImageTextureAtlas crossOrigin='anonymous' containerField='voxels' url='aorta4096.png'
                                  numberOfSlices='96' slicesOverX='10' slicesOverY='10'/>
@@ -28,8 +27,8 @@
                 <ImageTexture crossOrigin='anonymous' containerField='transferFunction' url='transfer.png'/>
               </OpacityMapVolumeStyle>
             </VolumeData>
-            </Transform>
-          </Group>
+          </Transform>
+          
           
       </Scene>
     </X3D>
