@@ -274,8 +274,10 @@ function enterVR() {
         if (_scaleToHMD) {
           var canvasWidth = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2 / window.devicePixelRatio;
           canvas.style.width = canvasWidth + 'px'; // x3dom sets canvas.width/height from style
+          canvas.width = canvasWidth; // but polyfill needs it earlier
           var canvasHeight = Math.max(leftEye.renderHeight, rightEye.renderHeight) / window.devicePixelRatio;
           canvas.style.height = canvasHeight + 'px';
+          canvas.height = canvasHeight;
         }
         if (!_mirrorDisplay && vrHMD.capabilities.hasExternalDisplay) // skip if mobile or explicit mirroring
           enterVRPrompt.style.display = 'block'; //show message
