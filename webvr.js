@@ -272,9 +272,9 @@ function enterVR() {
       //attributes override all styles
         var canvas = runtime.canvas.canvas;
         if (_scaleToHMD) {
-          var canvasWidth = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2 / windows.devicePixelRatio;
+          var canvasWidth = Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2 / window.devicePixelRatio;
           canvas.style.width = canvasWidth + 'px'; // x3dom sets canvas.width/height from style
-          var canvasHeight = Math.max(leftEye.renderHeight, rightEye.renderHeight) / windows.devicePixelRatio;
+          var canvasHeight = Math.max(leftEye.renderHeight, rightEye.renderHeight) / window.devicePixelRatio;
           canvas.style.height = canvasHeight + 'px';
         }
         if (!_mirrorDisplay && vrHMD.capabilities.hasExternalDisplay) // skip if mobile or explicit mirroring
