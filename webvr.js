@@ -77,7 +77,7 @@ function load() {
   _initialPosition = viewpoint.getFieldValue('position');
   
   // disable direct rendering, by wrapping content in non-rendered group
-  
+  /*
   var rootGroup = document.createElement('Group');
   rootGroup.setAttribute('render', 'false');
   var theScene = document.querySelector( '[DEF="' + _scene + '"]' );
@@ -90,7 +90,7 @@ function load() {
   }
   theScene.parentNode.removeChild(theScene);
   rootGroup.appendChild(sceneGroup);
-  
+  */
 /*  var xhr = new XMLHttpRequest();
   xhr.open('GET', 'webvr.x3d');
   xhr.onreadystatechange = function() {
