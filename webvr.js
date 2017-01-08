@@ -23,7 +23,7 @@ var _scene = "scene";
 var _x3dEl = "x3d-elem";
 var _x3dSize = {};
   
-var viewpoint;
+var viewpoint, viewfrustum;
 var _initialPosition;
 
 var enterVRPrompt;
@@ -98,6 +98,7 @@ function load() {
       if (xhr.status === 200) {
         var text = xhr.responseText;
 */
+  /*
         var text = getStereoX3D();
         text = text.replace(/\$VIEWPOINT/g, _viewpoint);
         text = text.replace(/\$BACKGROUND/g, _background);
@@ -108,7 +109,11 @@ function load() {
 
         var scene = document.querySelector('Scene');
         scene.appendChild(node);
-
+*/
+  
+  viewfrustum = document.createElement('Viewfrustum');
+  viewpoint.parentNode.insertBefore(viewfrustum, viewpoint);
+  
         init();
   /*
       } else {
@@ -127,14 +132,16 @@ function init() {
   _x3dSize.height = runtime.canvas.canvas.getAttribute('height');
   _x3dSize.width = runtime.canvas.canvas.getAttribute('width');
   
+  /*
   var ns = "";
   ns = "Webvr__";
   rtLeft = document.getElementById( ns + 'rtLeft');
   rtRight = document.getElementById( ns + 'rtRight');
-
+*/
 
   disableControls();
 
+  viewfrustum.setAttribute('set_bind', true); // switch to HMD controlled viewpoint
 
   //runtime.enterFrame = enterFrame;
 
@@ -169,6 +176,20 @@ function init() {
       viewpoint.releaseFieldRef('position');
     }
 */
+    vrHMD.getFrameData(frameData);
+    var lPMatrix = matrixFromVrMatrix(frameData.leftProjectionMatrix);
+    var rPMatrix = matrixFromVrMatrix(frameData.rightProjectionMatrix);
+    var lVMatrix = matrixFromVrMatrix(frameData.leftViewMatrix);
+    var rVMatrix = matrixFromVrMatrix(frameData.rightViewMatrix);
+    
+    var mvMatrix = viewfrustum.requestFieldRef('modelview');
+    mvMatrix = lVMatrix.invert().transpose(); // viewfrustum node expects that, just use left for now
+    viewfrustum.releaseFieldRef('modelview');
+    
+    var pMatrix = viewfrustum.requestFieldRef('projection');
+    mvMatrix = lVMatrix.transpose(); // viewfrustum node expects that; could be optimized
+    viewfrustum.releaseFieldRef('projection');
+    
     runtime.triggerRedraw(); //necessary since no mutations anymore
     if (vrHMD.isPresenting) {
       vrHMD.submitFrame();
@@ -240,6 +261,15 @@ function init() {
   runtime.doc.appendChild(enterVRPrompt);
   
 };
+  
+function matrixFromVrMatrix (vrMatrix) {
+               //vr matrix is in column major order like GL
+               //x3d is in row major order
+               //setFromArray does it
+               var mat = new x3dom.fields.SFMatrix4f();
+               mat.setFromArray(vrMatrix);
+               return mat;
+}
 
 function isWebVRSupported() {
   return ('getVRDisplays' in navigator);
