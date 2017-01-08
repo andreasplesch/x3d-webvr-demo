@@ -321,6 +321,9 @@ function enterVR() {
       canvas.style.width = _x3dSize.width + 'px';
       canvas.style.height = _x3dSize.height + 'px';
       enterVRPrompt.style.display = 'none';
+      
+      viewpoint.setAttribute('set_bind', true);
+      
       _log('Exited VR presenting');
     });
   }
