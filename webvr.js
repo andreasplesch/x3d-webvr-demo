@@ -183,7 +183,7 @@ function init() {
     var rVMatrix = matrixFromVrMatrix(frameData.rightViewMatrix);
     
     var mvMatrix = viewfrustum.requestFieldRef('modelview');
-    mvMatrix = lVMatrix.invert().transpose(); // viewfrustum node expects that, just use left for now
+    mvMatrix = lVMatrix.inverse().transpose(); // viewfrustum node expects that, just use left for now
     viewfrustum.releaseFieldRef('modelview');
     
     var pMatrix = viewfrustum.requestFieldRef('projection');
