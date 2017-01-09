@@ -183,11 +183,11 @@ function init() {
     var rVMatrix = matrixFromVrMatrix(frameData.rightViewMatrix);
     
     var mvMatrix = viewfrustum.requestFieldRef('modelview');
-    mvMatrix = lVMatrix.inverse().transpose(); // viewfrustum node expects that, just use left for now
+    mvMatrix.setValues(lVMatrix.inverse().transpose()); // viewfrustum node expects that, just use left for now
     viewfrustum.releaseFieldRef('modelview');
     
     var pMatrix = viewfrustum.requestFieldRef('projection');
-    mvMatrix = lVMatrix.transpose(); // viewfrustum node expects that; could be optimized
+    pMatrix.setValues(lPMatrix.transpose()); // viewfrustum node expects that; could be optimized
     viewfrustum.releaseFieldRef('projection');
     
     runtime.triggerRedraw(); //necessary since no mutations anymore
