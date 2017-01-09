@@ -117,7 +117,8 @@ function load() {
   viewtrafo.setAttribute('translation', _initialPosition);
   viewtrafo.setAttribute('rotation', _initialOrientation);
   viewfrustum = document.createElement('Viewfrustum');
-  viewpoint.parentNode.insertBefore(viewfrustum, viewpoint);
+  viewtrafo.appendChild(viewfrustum);
+  viewpoint.parentNode.insertBefore(viewtrafo, viewpoint);
   
         init();
   /*
