@@ -187,7 +187,7 @@ function init() {
     viewfrustum.releaseFieldRef('modelview');
     
     var pMatrix = viewfrustum.requestFieldRef('projection');
-    pMatrix.setValues(lPMatrix); // viewfrustum node expects that; could be optimized
+    pMatrix.setValues(lPMatrix.transpose()); // viewfrustum node expects that; could be optimized
     viewfrustum.releaseFieldRef('projection');
     
     runtime.triggerRedraw(); //necessary since no mutations anymore
