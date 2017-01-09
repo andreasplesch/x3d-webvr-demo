@@ -23,8 +23,8 @@ var _scene = "scene";
 var _x3dEl = "x3d-elem";
 var _x3dSize = {};
   
-var viewpoint, viewfrustum;
-var _initialPosition;
+var viewpoint, viewtrafo, viewfrustum;
+var _initialPosition, _initialOrientation;
 
 var enterVRPrompt;
 var _enterVRMessage = 'Ready to use VR headset !';
@@ -74,7 +74,10 @@ function load() {
     console.log('viewpoint ID: ' + _viewpoint + ' not found');
     return;
   }
-  _initialPosition = viewpoint.getFieldValue('position');
+  //_initialPosition = viewpoint.getFieldValue('position');
+  _initialPosition = viewpoint.getAttribute('position');
+  //_initialOrientation = viewpoint.getFieldValue('orientation');
+  _initialOrientation = viewpoint.getAttribute('orientation');
   
   // disable direct rendering, by wrapping content in non-rendered group
   /*
@@ -110,7 +113,9 @@ function load() {
         var scene = document.querySelector('Scene');
         scene.appendChild(node);
 */
-  
+  viewtrafo = document.createElement('Transformation');
+  viewtrafo.setAttribute('translation', _initialPosition);
+  viewtrafo.setAttribute('rotation', _initialOrientation);
   viewfrustum = document.createElement('Viewfrustum');
   viewpoint.parentNode.insertBefore(viewfrustum, viewpoint);
   
