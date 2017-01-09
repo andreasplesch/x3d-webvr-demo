@@ -113,7 +113,7 @@ function load() {
         var scene = document.querySelector('Scene');
         scene.appendChild(node);
 */
-  viewtrafo = document.createElement('Transformation');
+  viewtrafo = document.createElement('Transform');
   viewtrafo.setAttribute('translation', _initialPosition);
   viewtrafo.setAttribute('rotation', _initialOrientation);
   viewfrustum = document.createElement('Viewfrustum');
