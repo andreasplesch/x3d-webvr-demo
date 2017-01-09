@@ -2,8 +2,8 @@
 
 var runtime = null;
 
-var rtLeft, rtRight;
-var _renderScale = 0.5; // 1
+//var rtLeft, rtRight;
+//var _renderScale = 0.5; // 1
 
 var vrHMD = null;
 
@@ -17,8 +17,8 @@ window.WebVRSupport = WebVRSupport;
 
 // defaults element IDs/defs, normally always passed
 var _viewpoint = "viewpoint";
-var _background = "background";
-var _scene = "scene";
+//var _background = "background";
+//var _scene = "scene";
 
 var _x3dEl = "x3d-elem";
 var _x3dSize = {};
@@ -39,13 +39,13 @@ function _initialize( options ) {
 
   if (options.viewpoint)
     _viewpoint = options.viewpoint;
-  if (options.background)
-    _background = options.background;
-  if (options.scene)
-    _scene = options.scene;
-  if (options.renderScale)
-    _renderScale = options.renderScale;
-  if (options.x3dEl)
+//   if (options.background)
+//     _background = options.background;
+//   if (options.scene)
+//     _scene = options.scene;
+//   if (options.renderScale)
+//     _renderScale = options.renderScale;
+//   if (options.x3dEl)
     _x3dEl = options.x3dEl;
   if (options.enterVRMessage)
     _enterVRMessage = options.enterVRMessage;
@@ -113,8 +113,9 @@ function load() {
         var scene = document.querySelector('Scene');
         scene.appendChild(node);
 */
+  //add viewfrustum node for direct matrix based view control
   viewtrafo = document.createElement('Transform');
-  viewtrafo.setAttribute('translation', _initialPosition);
+  viewtrafo.setAttribute('translation', _initialPosition); //preserve initial position/orientation
   viewtrafo.setAttribute('rotation', _initialOrientation);
   viewfrustum = document.createElement('Viewfrustum');
   viewtrafo.appendChild(viewfrustum);
@@ -280,7 +281,7 @@ function matrixFromVrMatrix (vrMatrix) {
 function isWebVRSupported() {
   return ('getVRDisplays' in navigator);
 }
-
+/*
 function getPose(vrDisplay) {
   var pose = null;
   if (vrDisplay.getFrameData) { // '1.1'
@@ -291,7 +292,7 @@ function getPose(vrDisplay) {
   }
   return pose;
 }
-
+*/
 // toggles
 function enterVR() {
   if (!vrHMD) {
@@ -407,7 +408,7 @@ function _log() {
   if (!enableLogging) return;
   console.log.apply(console, arguments);
 }
-  
+/*  
 function getStereoX3D() {
   var x3dText = '\
 <Group id="Webvr__stereoRt" render="true">\
@@ -489,3 +490,4 @@ function getStereoX3D() {
   return x3dText;
 }
 })();
+*/
