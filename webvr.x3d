@@ -5,7 +5,7 @@
         <renderedtexture id="Webvr__rtLeft"
           stereoMode="LEFT_EYE" update="ALWAYS"
           dimensions="1024 1024 4" repeatS="false" repeatT="false"
-          lensCenter='0.03'>
+          lensCenter='0.07'>
           <viewpoint  use="$VIEWPOINT"  containerfield="viewpoint"></viewpoint>
           <background use="$BACKGROUND" containerfield="background"></background>
           <group      use="$SCENE"      containerfield="scene"></group>
@@ -54,7 +54,7 @@
         <renderedtexture id="Webvr__rtRight"
           stereoMode="RIGHT_EYE" update="ALWAYS"
           dimensions="1024 1024 4" repeatS="false" repeatT="false"
-          lensCenter='0.03'>
+          lensCenter='0.07'>
           <viewpoint  use="$VIEWPOINT"  containerfield="viewpoint"></viewpoint>
           <background use="$BACKGROUND" containerfield="background"></background>
           <group      use="$SCENE"      containerfield="scene"></group>
